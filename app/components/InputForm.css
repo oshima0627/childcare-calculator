@@ -1,0 +1,193 @@
+/**
+ * InputForm コンポーネントのスタイル
+ */
+
+.input-form {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border: 1px solid var(--color-border);
+}
+
+.input-form h2 {
+  color: var(--color-primary);
+  margin-bottom: var(--spacing-lg);
+  text-align: center;
+}
+
+/* 必須マーク */
+.required {
+  color: var(--color-error);
+  margin-left: var(--spacing-xs);
+}
+
+/* フォームグループ */
+.form-group {
+  margin-bottom: var(--spacing-lg);
+}
+
+.form-group:last-child {
+  margin-bottom: 0;
+}
+
+/* 入力フィールド */
+.form-group input[type="number"] {
+  font-size: var(--font-size-lg);
+  padding: var(--spacing-md);
+  text-align: right;
+  font-weight: 600;
+}
+
+.form-group input[type="number"].has-error {
+  border-color: var(--color-error);
+  background-color: #FFF5F5;
+}
+
+/* ヘルプテキスト */
+.form-help {
+  font-size: var(--font-size-sm);
+  color: #666;
+  margin-top: var(--spacing-xs);
+  line-height: var(--line-height-relaxed);
+}
+
+/* ラジオボタン */
+.radio-group {
+  display: flex;
+  gap: var(--spacing-lg);
+  margin-top: var(--spacing-sm);
+}
+
+@media (max-width: 480px) {
+  .radio-group {
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+}
+
+.radio-label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: var(--spacing-sm);
+  border-radius: var(--border-radius-sm);
+  transition: background-color 0.2s ease;
+  border: 1px solid transparent;
+  font-weight: normal;
+  margin-bottom: 0;
+}
+
+.radio-label:hover {
+  background-color: rgba(33, 150, 243, 0.05);
+  border-color: var(--color-primary);
+}
+
+.radio-label input[type="radio"] {
+  margin-right: var(--spacing-sm);
+  width: 18px;
+  height: 18px;
+}
+
+.radio-text {
+  font-size: var(--font-size-base);
+  color: var(--color-text);
+}
+
+/* ラジオボタンが選択されているときのスタイル */
+.radio-label:has(input[type="radio"]:checked) {
+  background-color: rgba(33, 150, 243, 0.1);
+  border-color: var(--color-primary);
+}
+
+.radio-label:has(input[type="radio"]:checked) .radio-text {
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+/* ステータスメッセージ */
+.form-status {
+  text-align: center;
+  margin-top: var(--spacing-xl);
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius);
+}
+
+.status-message {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  margin: 0;
+}
+
+.status-message.success {
+  color: var(--color-success);
+  background-color: #F1F8E9;
+  border: 1px solid #C8E6C9;
+}
+
+.status-message.info {
+  color: #1976D2;
+  background-color: #E3F2FD;
+  border: 1px solid #BBDEFB;
+}
+
+/* エラーメッセージのアニメーション */
+.error-message {
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* フィールドセット */
+fieldset {
+  background-color: var(--color-white);
+}
+
+legend {
+  background-color: var(--color-white);
+  color: var(--color-text);
+}
+
+/* フォーカス時のアクセシビリティ強化 */
+input[type="number"]:focus {
+  box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.3);
+}
+
+input[type="radio"]:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* ハイコントラストモード対応 */
+@media (prefers-contrast: high) {
+  .radio-label:has(input[type="radio"]:checked) {
+    border: 2px solid var(--color-primary);
+    background-color: rgba(33, 150, 243, 0.2);
+  }
+  
+  .status-message.success {
+    border: 2px solid var(--color-success);
+  }
+  
+  .status-message.info {
+    border: 2px solid #1976D2;
+  }
+}
+
+/* プリント時の最適化 */
+@media print {
+  .form-status {
+    display: none;
+  }
+  
+  .input-form {
+    background: white;
+    border: 1px solid #000;
+  }
+}

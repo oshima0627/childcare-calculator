@@ -1,0 +1,446 @@
+/**
+ * MonthlyTable コンポーネントのスタイル
+ */
+
+.monthly-table {
+  margin-top: var(--spacing-xl);
+}
+
+.section-description {
+  text-align: center;
+  color: #666;
+  margin-bottom: var(--spacing-lg);
+  font-size: var(--font-size-sm);
+}
+
+/* テーブルコンテナ */
+.table-container {
+  margin-bottom: var(--spacing-xl);
+}
+
+.scroll-hint {
+  font-size: var(--font-size-sm);
+  color: var(--color-primary);
+  text-align: center;
+  margin-bottom: var(--spacing-md);
+  padding: var(--spacing-sm);
+  background: rgba(33, 150, 243, 0.1);
+  border-radius: var(--border-radius-sm);
+  border: 1px solid rgba(33, 150, 243, 0.2);
+}
+
+@media (min-width: 768px) {
+  .scroll-hint {
+    display: none;
+  }
+}
+
+.table-wrapper {
+  overflow-x: auto;
+  border-radius: var(--border-radius);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+  background: var(--color-white);
+}
+
+/* テーブル */
+.benefits-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 500px;
+  font-size: var(--font-size-sm);
+}
+
+/* ヘッダー */
+.benefits-table thead {
+  background: linear-gradient(135deg, var(--color-primary) 0%, #1976D2 100%);
+  color: var(--color-white);
+}
+
+.benefits-table th {
+  padding: var(--spacing-md);
+  text-align: left;
+  font-weight: 600;
+  font-size: var(--font-size-sm);
+  border-bottom: 2px solid #1976D2;
+}
+
+.month-header { width: 20%; }
+.benefit-header { width: 30%; }
+.cumulative-header { width: 30%; }
+.rate-header { width: 20%; }
+
+/* テーブル行 */
+.table-row {
+  transition: background-color 0.2s ease;
+}
+
+.table-row:hover {
+  background-color: #F8F9FA;
+}
+
+.table-row td {
+  padding: var(--spacing-md) var(--spacing-md);
+  border-bottom: 1px solid var(--color-border-light);
+  vertical-align: middle;
+}
+
+/* 期間別の背景色 */
+.period-67 {
+  background: rgba(76, 175, 80, 0.02);
+  border-left: 3px solid var(--color-bar-67);
+}
+
+.period-50 {
+  background: rgba(255, 152, 0, 0.02);
+  border-left: 3px solid var(--color-bar-50);
+}
+
+.last-67-percent {
+  border-bottom: 2px solid var(--color-bar-67);
+}
+
+.first-50-percent {
+  border-top: 2px solid var(--color-bar-50);
+}
+
+/* セル内容 */
+.month-text {
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.benefit-amount,
+.cumulative-amount {
+  font-family: 'Courier New', monospace;
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.cumulative-amount {
+  color: var(--color-success);
+}
+
+/* 給付率バッジ */
+.rate-badge {
+  display: inline-block;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--border-radius-sm);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  color: var(--color-white);
+  text-align: center;
+  min-width: 45px;
+}
+
+.rate-67 {
+  background: linear-gradient(135deg, var(--color-bar-67) 0%, #388E3C 100%);
+}
+
+.rate-50 {
+  background: linear-gradient(135deg, var(--color-bar-50) 0%, #F57C00 100%);
+}
+
+/* 区切り行 */
+.separator-row {
+  background: linear-gradient(135deg, #E3F2FD 0%, #FFF3E0 100%);
+}
+
+.separator-cell {
+  padding: var(--spacing-lg) var(--spacing-md);
+  text-align: center;
+  border-top: 2px solid var(--color-border);
+  border-bottom: 2px solid var(--color-border);
+}
+
+.rate-change-notice {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.notice-icon {
+  font-size: var(--font-size-lg);
+}
+
+.notice-text {
+  font-size: var(--font-size-sm);
+}
+
+/* フッター（合計行） */
+.benefits-table tfoot {
+  background: linear-gradient(135deg, #F8F9FA 0%, #E9ECEF 100%);
+  border-top: 3px solid var(--color-primary);
+}
+
+.total-row td {
+  padding: var(--spacing-lg) var(--spacing-md);
+  font-weight: 600;
+  border-bottom: none;
+}
+
+.total-amount {
+  font-family: 'Courier New', monospace;
+  font-size: var(--font-size-lg);
+  color: var(--color-success);
+  background: rgba(76, 175, 80, 0.1);
+  padding: var(--spacing-xs);
+  border-radius: var(--border-radius-sm);
+  border: 1px solid rgba(76, 175, 80, 0.3);
+}
+
+.total-note {
+  color: #999;
+  font-style: italic;
+}
+
+.average-badge {
+  background: var(--color-text);
+  color: var(--color-white);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--border-radius-sm);
+  font-size: var(--font-size-xs);
+}
+
+/* 支給スケジュール */
+.payment-schedule {
+  background: var(--color-white);
+  border-radius: var(--border-radius);
+  padding: var(--spacing-lg);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: var(--spacing-xl);
+}
+
+.payment-schedule h3 {
+  margin-bottom: var(--spacing-md);
+  color: var(--color-primary);
+  text-align: center;
+}
+
+.schedule-info {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+}
+
+.schedule-item {
+  background: #F8F9FA;
+  border-radius: var(--border-radius-sm);
+  padding: var(--spacing-md);
+  border: 1px solid var(--color-border-light);
+  text-align: center;
+  transition: transform 0.2s ease;
+}
+
+.schedule-item:hover {
+  transform: translateY(-2px);
+}
+
+.schedule-item.highlight {
+  border-color: var(--color-warning);
+  background: rgba(255, 152, 0, 0.05);
+}
+
+.schedule-period {
+  font-weight: 600;
+  color: var(--color-primary);
+  margin-bottom: var(--spacing-xs);
+}
+
+.schedule-payment {
+  font-size: var(--font-size-sm);
+  color: #666;
+  margin-bottom: var(--spacing-xs);
+}
+
+.schedule-amount {
+  font-family: 'Courier New', monospace;
+  font-weight: 600;
+  color: var(--color-success);
+  font-size: var(--font-size-base);
+}
+
+.schedule-note {
+  background: rgba(255, 152, 0, 0.1);
+  border: 1px solid rgba(255, 152, 0, 0.3);
+  border-radius: var(--border-radius-sm);
+  padding: var(--spacing-md);
+}
+
+.schedule-note p {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-relaxed);
+  color: #856404;
+}
+
+/* 月別の特徴 */
+.monthly-features {
+  background: var(--color-white);
+  border-radius: var(--border-radius);
+  padding: var(--spacing-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.monthly-features h3 {
+  margin-bottom: var(--spacing-lg);
+  color: var(--color-primary);
+  text-align: center;
+}
+
+.features-comparison {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--spacing-lg);
+}
+
+.feature-period {
+  border-radius: var(--border-radius-sm);
+  padding: var(--spacing-lg);
+  border: 2px solid var(--color-border-light);
+}
+
+.feature-period.period-67 {
+  background: rgba(76, 175, 80, 0.03);
+  border-color: rgba(76, 175, 80, 0.3);
+}
+
+.feature-period.period-50 {
+  background: rgba(255, 152, 0, 0.03);
+  border-color: rgba(255, 152, 0, 0.3);
+}
+
+.feature-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-md);
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+}
+
+.feature-header h4 {
+  margin: 0;
+  color: var(--color-text);
+  font-size: var(--font-size-base);
+}
+
+.period-badge {
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--border-radius-sm);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  color: var(--color-white);
+}
+
+.period-badge.rate-67 {
+  background: var(--color-bar-67);
+}
+
+.period-badge.rate-50 {
+  background: var(--color-bar-50);
+}
+
+.feature-content ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.feature-content li {
+  padding: var(--spacing-xs) 0;
+  border-bottom: 1px solid var(--color-border-light);
+  font-size: var(--font-size-sm);
+  color: #666;
+}
+
+.feature-content li:last-child {
+  border-bottom: none;
+}
+
+.feature-content li:first-child,
+.feature-content li:nth-child(2) {
+  font-family: 'Courier New', monospace;
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+/* モバイル対応 */
+@media (max-width: 768px) {
+  .benefits-table {
+    font-size: var(--font-size-xs);
+  }
+  
+  .benefits-table th,
+  .benefits-table td {
+    padding: var(--spacing-sm);
+  }
+  
+  .rate-badge,
+  .average-badge {
+    font-size: 10px;
+    padding: 2px var(--spacing-xs);
+    min-width: 35px;
+  }
+  
+  .total-amount {
+    font-size: var(--font-size-base);
+  }
+  
+  .schedule-info {
+    grid-template-columns: 1fr;
+  }
+  
+  .features-comparison {
+    grid-template-columns: 1fr;
+  }
+  
+  .feature-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 480px) {
+  .table-wrapper {
+    margin: 0 calc(-1 * var(--spacing-md));
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+  }
+  
+  .monthly-table {
+    margin-top: var(--spacing-lg);
+  }
+  
+  .benefits-table {
+    min-width: 400px;
+  }
+}
+
+/* プリント対応 */
+@media print {
+  .scroll-hint {
+    display: none;
+  }
+  
+  .table-wrapper {
+    box-shadow: none;
+    border: 1px solid #000;
+  }
+  
+  .payment-schedule,
+  .monthly-features {
+    box-shadow: none;
+    border: 1px solid #000;
+    break-inside: avoid;
+  }
+  
+  .schedule-item {
+    break-inside: avoid;
+  }
+}

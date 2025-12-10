@@ -1,0 +1,307 @@
+/**
+ * 出生後休業支援給付金コンポーネントのスタイル
+ */
+
+.enhanced-benefit {
+  background: linear-gradient(135deg, #fff8e1 0%, #f3e5f5 50%, #e8f5e8 100%);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-lg);
+  padding: var(--spacing-xl);
+  margin-top: var(--spacing-xl);
+  border: 2px solid #ffd54f;
+  position: relative;
+}
+
+.enhanced-benefit::before {
+  content: '🆕';
+  position: absolute;
+  top: -10px;
+  right: var(--spacing-lg);
+  background: linear-gradient(45deg, #ff9800, #ffc107);
+  color: white;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--border-radius);
+  font-size: var(--font-size-xs);
+  font-weight: bold;
+  box-shadow: var(--shadow-sm);
+}
+
+.enhanced-benefit h2 {
+  margin-bottom: var(--spacing-lg);
+  color: #e65100;
+  text-align: center;
+  font-size: var(--font-size-xl);
+}
+
+.enhanced-benefit h3 {
+  margin-bottom: var(--spacing-md);
+  color: var(--color-primary);
+  border-bottom: 2px solid #ffd54f;
+  padding-bottom: var(--spacing-xs);
+}
+
+/* 適用条件セクション */
+.enhanced-conditions {
+  margin-bottom: var(--spacing-xl);
+}
+
+.conditions-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.condition-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  background: rgba(255, 255, 255, 0.7);
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius);
+  border-left: 4px solid #4caf50;
+}
+
+.condition-icon {
+  color: #4caf50;
+  font-weight: bold;
+  font-size: var(--font-size-lg);
+}
+
+/* 給付金額セクション */
+.enhanced-benefits {
+  margin-bottom: var(--spacing-xl);
+}
+
+.benefit-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-lg);
+}
+
+.benefit-period {
+  background: rgba(255, 255, 255, 0.9);
+  padding: var(--spacing-lg);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-sm);
+  text-align: center;
+}
+
+.period-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-md);
+}
+
+.period-header h4 {
+  margin: 0;
+  color: var(--color-primary);
+}
+
+.benefit-rate {
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--border-radius);
+  font-weight: bold;
+  font-size: var(--font-size-sm);
+  color: white;
+}
+
+.benefit-rate.enhanced {
+  background: linear-gradient(45deg, #ff5722, #ff9800);
+  box-shadow: 0 2px 4px rgba(255, 87, 34, 0.3);
+}
+
+.benefit-rate.normal {
+  background: linear-gradient(45deg, #2196f3, #3f51b5);
+}
+
+.benefit-amount {
+  font-size: var(--font-size-xl);
+  font-weight: bold;
+  color: var(--color-primary);
+  margin-bottom: var(--spacing-sm);
+}
+
+.benefit-amount.enhanced {
+  color: #e65100;
+  text-shadow: 0 1px 2px rgba(230, 81, 0, 0.2);
+}
+
+.maintenance-rate {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: #666;
+}
+
+.maintenance-rate.enhanced {
+  color: #e65100;
+  background: rgba(255, 213, 79, 0.3);
+  padding: var(--spacing-xs);
+  border-radius: var(--border-radius);
+}
+
+/* 計算内訳セクション */
+.calculation-breakdown {
+  margin: var(--spacing-md) 0;
+  padding: var(--spacing-md);
+  background: rgba(255, 245, 238, 0.8);
+  border-radius: var(--border-radius);
+  border-left: 3px solid #ff9800;
+}
+
+.breakdown-title {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: #e65100;
+  margin-bottom: var(--spacing-xs);
+}
+
+.breakdown-item {
+  font-size: var(--font-size-sm);
+  color: #666;
+  margin-bottom: var(--spacing-xs);
+  padding-left: var(--spacing-sm);
+}
+
+.breakdown-total {
+  font-size: var(--font-size-sm);
+  font-weight: bold;
+  color: #e65100;
+  padding-top: var(--spacing-xs);
+  border-top: 1px solid #ff9800;
+  margin-top: var(--spacing-xs);
+}
+
+.benefit-note {
+  font-size: var(--font-size-sm);
+  color: #666;
+  font-style: italic;
+}
+
+/* 比較セクション */
+.enhancement-summary {
+  margin-bottom: var(--spacing-xl);
+}
+
+.comparison-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: var(--spacing-md);
+}
+
+.comparison-item {
+  background: rgba(255, 255, 255, 0.9);
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius);
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+}
+
+.comparison-item.highlight {
+  background: linear-gradient(135deg, #fff3e0, #ffecb3);
+  border: 2px solid #ff9800;
+}
+
+.comparison-item.warning {
+  background: linear-gradient(135deg, #fff8e1, #ffecb3);
+  border: 2px solid #ff9800;
+}
+
+.comparison-label {
+  font-size: var(--font-size-sm);
+  color: #666;
+  margin-bottom: var(--spacing-xs);
+}
+
+.comparison-value {
+  font-size: var(--font-size-lg);
+  font-weight: bold;
+  color: var(--color-primary);
+}
+
+.comparison-note {
+  font-size: var(--font-size-xs);
+  color: #666;
+  margin-top: var(--spacing-xs);
+  line-height: var(--line-height-compact);
+}
+
+.comparison-item.highlight .comparison-value {
+  color: #e65100;
+}
+
+/* 制度情報セクション */
+.enhanced-info {
+  background: rgba(255, 255, 255, 0.9);
+  padding: var(--spacing-lg);
+  border-radius: var(--border-radius-lg);
+  border-left: 4px solid #2196f3;
+}
+
+.info-content p {
+  margin-bottom: var(--spacing-md);
+  line-height: var(--line-height-relaxed);
+  color: #555;
+}
+
+.highlight-note {
+  background: linear-gradient(135deg, #e3f2fd, #f3e5f5);
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius);
+  border-left: 4px solid #2196f3;
+  margin-top: var(--spacing-md);
+}
+
+.highlight-note strong {
+  color: var(--color-primary);
+}
+
+/* モバイル対応 */
+@media (max-width: 768px) {
+  .enhanced-benefit {
+    padding: var(--spacing-lg);
+  }
+  
+  .benefit-details {
+    grid-template-columns: 1fr;
+  }
+  
+  .comparison-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .period-header {
+    flex-direction: column;
+    gap: var(--spacing-xs);
+  }
+  
+  .condition-item {
+    flex-direction: column;
+    text-align: center;
+    gap: var(--spacing-xs);
+  }
+}
+
+@media (max-width: 480px) {
+  .comparison-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* アクセシビリティ: 高コントラストモード対応 */
+@media (prefers-contrast: high) {
+  .enhanced-benefit {
+    border: 3px solid #000;
+  }
+  
+  .benefit-rate {
+    border: 2px solid #000;
+  }
+}
+
+/* アニメーション無効設定対応 */
+@media (prefers-reduced-motion: reduce) {
+  .enhanced-benefit::before {
+    animation: none;
+  }
+}

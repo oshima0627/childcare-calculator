@@ -1,0 +1,15 @@
+User-agent: *
+Allow: /
+
+# サイトマップの場所
+Sitemap: https://childcare-calculator.vercel.app/sitemap.xml
+
+# 特定のボットに対する設定
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# クロール遅延設定（サーバー負荷軽減）
+Crawl-delay: 1

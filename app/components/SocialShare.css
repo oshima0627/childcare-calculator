@@ -1,0 +1,181 @@
+/**
+ * ソーシャル共有コンポーネントのスタイル
+ */
+
+.social-share {
+  background: var(--color-white);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: var(--spacing-xl);
+  margin-top: var(--spacing-xl);
+}
+
+.social-share h3 {
+  margin-bottom: var(--spacing-sm);
+  color: var(--color-primary);
+}
+
+.share-description {
+  color: #666;
+  margin-bottom: var(--spacing-xl);
+  line-height: var(--line-height-relaxed);
+}
+
+.share-buttons {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-xl);
+}
+
+.share-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-md) var(--spacing-lg);
+  border: none;
+  border-radius: var(--border-radius);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  color: white;
+}
+
+.share-button:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.share-button:active {
+  transform: translateY(0);
+}
+
+.share-button:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.share-button.twitter {
+  background: linear-gradient(135deg, #1da1f2 0%, #0d8bd9 100%);
+}
+
+.share-button.twitter:hover {
+  background: linear-gradient(135deg, #0d8bd9 0%, #0a7bc4 100%);
+}
+
+.share-button.line {
+  background: linear-gradient(135deg, #00b900 0%, #00a000 100%);
+}
+
+.share-button.line:hover {
+  background: linear-gradient(135deg, #00a000 0%, #009000 100%);
+}
+
+.share-button.facebook {
+  background: linear-gradient(135deg, #1877f2 0%, #166fe5 100%);
+}
+
+.share-button.facebook:hover {
+  background: linear-gradient(135deg, #166fe5 0%, #1563d8 100%);
+}
+
+.share-button.copy {
+  background: linear-gradient(135deg, #6c757d 0%, #5a6268 100%);
+}
+
+.share-button.copy:hover {
+  background: linear-gradient(135deg, #5a6268 0%, #495057 100%);
+}
+
+.share-button.copy.copied {
+  background: linear-gradient(135deg, #28a745 0%, #20963d 100%);
+}
+
+.share-icon {
+  font-size: var(--font-size-lg);
+}
+
+.share-preview {
+  border-top: 1px solid #e0e0e0;
+  padding-top: var(--spacing-lg);
+}
+
+.share-preview h4 {
+  margin-bottom: var(--spacing-md);
+  color: var(--color-primary);
+  font-size: var(--font-size-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.preview-text {
+  background: #f8f9fa;
+  border: 1px solid #e0e0e0;
+  border-radius: var(--border-radius);
+  padding: var(--spacing-md);
+  font-size: var(--font-size-sm);
+  color: #555;
+  line-height: var(--line-height-relaxed);
+  white-space: pre-line;
+}
+
+/* モバイル対応 */
+@media (max-width: 768px) {
+  .social-share {
+    padding: var(--spacing-lg);
+  }
+  
+  .share-buttons {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-sm);
+  }
+  
+  .share-button {
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-size: var(--font-size-xs);
+  }
+  
+  .share-icon {
+    font-size: var(--font-size-base);
+  }
+}
+
+@media (max-width: 480px) {
+  .share-buttons {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ダークモード対応 */
+@media (prefers-color-scheme: dark) {
+  .preview-text {
+    background: #2d3748;
+    border-color: #4a5568;
+    color: #e2e8f0;
+  }
+}
+
+/* アクセシビリティ: 高コントラストモード対応 */
+@media (prefers-contrast: high) {
+  .share-button {
+    border: 2px solid #000;
+  }
+  
+  .share-button:focus {
+    outline: 3px solid #000;
+  }
+}
+
+/* アニメーション無効設定対応 */
+@media (prefers-reduced-motion: reduce) {
+  .share-button {
+    transition: none;
+  }
+  
+  .share-button:hover {
+    transform: none;
+  }
+}

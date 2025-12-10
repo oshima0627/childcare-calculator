@@ -1,0 +1,335 @@
+/**
+ * CurrentIncome コンポーネントのスタイル
+ */
+
+.current-income {
+  margin-top: var(--spacing-xl);
+}
+
+.section-description {
+  text-align: center;
+  color: #666;
+  margin-bottom: var(--spacing-xl);
+  font-size: var(--font-size-sm);
+}
+
+/* 収支内訳 */
+.income-breakdown {
+  background: var(--color-white);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-md);
+  padding: var(--spacing-xl);
+  margin-bottom: var(--spacing-xl);
+}
+
+/* 収入項目 */
+.income-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-md) 0;
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.income-item:last-child {
+  border-bottom: none;
+}
+
+.item-label {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  font-weight: 600;
+}
+
+.item-icon {
+  font-size: var(--font-size-lg);
+}
+
+.label-text {
+  font-size: var(--font-size-base);
+  color: var(--color-text);
+}
+
+.item-amount {
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  font-family: 'Courier New', monospace;
+}
+
+.item-amount.positive {
+  color: var(--color-primary);
+}
+
+.item-amount.negative {
+  color: #E53E3E;
+}
+
+.item-amount.final {
+  color: var(--color-success);
+  font-size: var(--font-size-xl);
+  border: 2px solid var(--color-success);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--border-radius-sm);
+  background: rgba(76, 175, 80, 0.1);
+}
+
+/* 総支給額 */
+.gross-salary {
+  background: linear-gradient(135deg, rgba(33, 150, 243, 0.1) 0%, rgba(33, 150, 243, 0.05) 100%);
+  border-radius: var(--border-radius-sm);
+  padding: var(--spacing-lg) var(--spacing-md);
+  border: 2px solid rgba(33, 150, 243, 0.2);
+  margin-bottom: var(--spacing-lg);
+}
+
+.gross-salary .item-amount {
+  font-size: var(--font-size-xl);
+}
+
+/* 控除セクション */
+.deductions-section {
+  margin: var(--spacing-lg) 0;
+}
+
+.deductions-title {
+  font-size: var(--font-size-base);
+  color: #666;
+  margin-bottom: var(--spacing-md);
+  text-align: center;
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: var(--spacing-sm);
+}
+
+.deduction-group {
+  margin-bottom: var(--spacing-lg);
+}
+
+.deduction-total {
+  background: rgba(229, 62, 62, 0.05);
+  border-radius: var(--border-radius-sm);
+  padding: var(--spacing-md);
+  border-left: 4px solid #E53E3E;
+}
+
+/* 控除詳細 */
+.deduction-details {
+  padding-left: var(--spacing-xl);
+  margin-top: var(--spacing-sm);
+}
+
+.detail-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-xs) 0;
+  font-size: var(--font-size-sm);
+}
+
+.detail-label {
+  color: #666;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.detail-amount {
+  color: #E53E3E;
+  font-weight: 600;
+  font-family: 'Courier New', monospace;
+}
+
+.age-note {
+  font-size: var(--font-size-xs);
+  color: var(--color-success);
+  font-weight: 600;
+}
+
+/* セパレーター */
+.income-separator {
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, var(--color-border) 20%, var(--color-border) 80%, transparent 100%);
+  margin: var(--spacing-lg) 0;
+  position: relative;
+}
+
+.income-separator::before {
+  content: '=';
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--color-white);
+  color: #666;
+  font-weight: bold;
+  padding: 0 var(--spacing-sm);
+  font-size: var(--font-size-lg);
+}
+
+/* 手取り額 */
+.net-income {
+  background: linear-gradient(135deg, rgba(76, 175, 80, 0.1) 0%, rgba(76, 175, 80, 0.05) 100%);
+  border-radius: var(--border-radius-sm);
+  padding: var(--spacing-lg) var(--spacing-md);
+  border: 2px solid rgba(76, 175, 80, 0.3);
+}
+
+/* 計算についての注意 */
+.calculation-notes {
+  background: #F8F9FA;
+  border-radius: var(--border-radius);
+  padding: var(--spacing-lg);
+  margin-bottom: var(--spacing-xl);
+  border: 1px solid var(--color-border);
+}
+
+.calculation-notes h3 {
+  margin-bottom: var(--spacing-md);
+  color: var(--color-primary);
+}
+
+.notes-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.note-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-sm);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-relaxed);
+}
+
+.note-bullet {
+  color: var(--color-primary);
+  font-weight: bold;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.note-text {
+  color: #666;
+}
+
+.note-text strong {
+  color: var(--color-text);
+}
+
+/* 控除率 */
+.deduction-rates {
+  background: var(--color-white);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-sm);
+  padding: var(--spacing-lg);
+}
+
+.deduction-rates h3 {
+  margin-bottom: var(--spacing-md);
+  text-align: center;
+  color: var(--color-primary);
+}
+
+.rates-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--spacing-md);
+}
+
+.rate-item {
+  text-align: center;
+  padding: var(--spacing-md);
+  background: #F8F9FA;
+  border-radius: var(--border-radius-sm);
+  border: 1px solid var(--color-border);
+}
+
+.rate-label {
+  font-size: var(--font-size-sm);
+  color: #666;
+  margin-bottom: var(--spacing-xs);
+}
+
+.rate-value {
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  font-family: 'Courier New', monospace;
+  color: var(--color-text);
+}
+
+.rate-value.highlight {
+  color: var(--color-success);
+  background: rgba(76, 175, 80, 0.1);
+  padding: var(--spacing-xs);
+  border-radius: var(--border-radius-sm);
+  border: 1px solid rgba(76, 175, 80, 0.3);
+}
+
+/* モバイル対応 */
+@media (max-width: 768px) {
+  .income-breakdown {
+    padding: var(--spacing-lg);
+  }
+  
+  .income-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+  }
+  
+  .item-label,
+  .item-amount {
+    width: 100%;
+  }
+  
+  .item-amount {
+    text-align: right;
+  }
+  
+  .deduction-details {
+    padding-left: var(--spacing-md);
+  }
+  
+  .detail-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-xs);
+  }
+  
+  .rates-grid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-sm);
+  }
+}
+
+@media (max-width: 480px) {
+  .income-breakdown {
+    padding: var(--spacing-md);
+  }
+  
+  .item-amount.final {
+    font-size: var(--font-size-lg);
+    padding: var(--spacing-sm);
+  }
+}
+
+/* アクセシビリティ */
+@media (prefers-reduced-motion: reduce) {
+  .income-separator::before {
+    animation: none;
+  }
+}
+
+/* プリント対応 */
+@media print {
+  .income-breakdown {
+    box-shadow: none;
+    border: 1px solid #000;
+  }
+  
+  .calculation-notes {
+    background: white;
+    border: 1px solid #000;
+  }
+}

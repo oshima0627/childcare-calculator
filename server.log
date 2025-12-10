@@ -1,0 +1,24 @@
+
+> childcare-calculator@1.0.0 dev
+> next dev
+
+   ▲ Next.js 15.5.7
+   - Local:        http://localhost:3000
+   - Network:      http://10.255.255.254:3000
+   - Environments: .env.local
+   - Experiments (use with caution):
+     ✓ optimizeCss
+     · optimizePackageImports
+
+ ✓ Starting...
+ ✓ Ready in 58.4s
+ ○ Compiling / ...
+ ✓ Compiled / in 1704ms (577 modules)
+ GET / 200 in 4410ms
+ GET / 200 in 138ms
+ GET / 200 in 205ms
+ GET / 200 in 315ms
+ GET / 200 in 247ms
+ GET / 200 in 226ms
+ GET / 200 in 127ms
+[?25h
