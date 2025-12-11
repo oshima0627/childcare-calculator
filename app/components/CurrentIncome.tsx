@@ -120,7 +120,7 @@ export default function CurrentIncome({ current }: CurrentIncomeProps) {
           <div className="note-item">
             <span className="note-bullet">•</span>
             <span className="note-text">
-              税金は<strong>概算</strong>です（実際は年収・控除により変動）
+              税金は<strong>概算</strong>です（実際は前年の年収・控除により変動）
             </span>
           </div>
           <div className="note-item">
