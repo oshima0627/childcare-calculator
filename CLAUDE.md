@@ -915,9 +915,55 @@ git commit -m "Initial commit: 育児休業給付金シミュレーター"
 git push -u origin main
 ```
 
-### 13.5 Vercel連携
+### 13.5 SSH認証設定（重要）
+リポジトリの操作には既存のSSHキーを使用します。
+
+**使用中のSSHキー:**
+- ファイル: `~/.ssh/id_ed25519`
+- フィンガープリント: `SHA256:ReJhcmUCn41LlhH1zN8uANNYwGMcNIBxisVUUKPpBXI`
+- GitHub登録名: `nexeed-lab`
+- 最終使用: 過去4週間以内
+
+**SSH設定ファイル（~/.ssh/config）:**
+```
+Host github.com
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/id_ed25519
+    IdentitiesOnly yes
+```
+
+**SSH接続テスト:**
+```bash
+ssh -T git@github.com
+```
+成功時のメッセージ: "Hi oshima0627! You've successfully authenticated, but GitHub does not provide shell access."
+
+**重要な注意点:**
+- SSH認証が正常でない場合、Vercelデプロイで「Canceled from the Vercel Dashboard」エラーが発生
+- コミット作者のメールアドレス（orfevre_gk_6.27@icloud.com）とVercelアカウントが一致している必要がある
+- 新しいSSHキーの生成は不要（既存キーを使用）
+
+### 13.6 Vercel連携
 - GitHubのmainブランチにプッシュすると自動的にVercelが再デプロイ
 - 継続的デプロイメント（CD）が有効
+- SSH認証が正常な場合、デプロイエラーは発生しない
+
+### 13.7 Vercel Analytics設定
+**パッケージ:** `@vercel/analytics`
+
+**app/layout.tsx設定:**
+```typescript
+import { Analytics } from '@vercel/analytics/next'
+
+// bodyタグの最後に追加
+<Analytics />
+```
+
+**機能:**
+- 訪問者数とページビュー数のトラッキング
+- リアルタイムデータ表示
+- Vercelダッシュボードで確認可能
 
 ---
 
