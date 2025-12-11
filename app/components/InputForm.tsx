@@ -7,7 +7,7 @@
 
 import { useState, useEffect, useCallback, useRef } from 'react'
 import { validateInput } from '../utils/calculator'
-import { formatInputNumber, parseFormattedNumber } from '../utils/formatter'
+import { formatInputNumber, parseFormattedNumber, formatNumber } from '../utils/formatter'
 import { DEBOUNCE_TIME } from '../utils/constants'
 import type { InputFormProps, ValidationError } from '../types'
 import './InputForm.css'
@@ -67,10 +67,27 @@ export default function InputForm({
    * 給与入力のブラー処理（フォーマット適用）
    */
   const handleSalaryBlur = () => {
-    const formatted = formatInputNumber(salary, true)
-    setSalary(formatted)
+    // 空文字や空白のみの場合は何もしない
+    if (!salary || !salary.trim()) {
+      return
+    }
     
-    if (formatted) {
+    // 元の値を保持
+    const originalValue = salary
+    
+    // 数値として解析
+    const numericValue = parseFormattedNumber(salary.trim())
+    
+    // 数値として有効な場合は、必ずフォーマットする
+    if (numericValue > 0 && !isNaN(numericValue)) {
+      setSalary(formatNumber(numericValue))
+    } else {
+      // 無効な値の場合は元の値を保持
+      setSalary(originalValue)
+    }
+    
+    // 有効な数値の場合のみ計算を実行
+    if (numericValue > 0 && !isNaN(numericValue)) {
       debouncedCalculate()
     }
   }

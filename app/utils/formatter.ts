@@ -73,16 +73,20 @@ export function safeParseInt(value: string | number): number {
  * @returns フォーマットされた文字列
  */
 export function formatInputNumber(value: string, allowEmpty = false): string {
-  if (allowEmpty && value === '') {
-    return ''
+  // 空文字の場合
+  if (value === '' || value.trim() === '') {
+    return allowEmpty ? '' : ''
   }
   
   const numericValue = parseFormattedNumber(value)
-  if (numericValue === 0 && !allowEmpty) {
-    return ''
+  
+  // 有効な数値が入力されている場合は、0でもフォーマットして返す
+  if (!isNaN(numericValue) && value.trim() !== '') {
+    return formatNumber(numericValue)
   }
   
-  return formatNumber(numericValue)
+  // 無効な入力の場合は空文字を返す
+  return ''
 }
 
 /**
