@@ -64,7 +64,7 @@ export default function InputForm({
   }
 
   /**
-   * 給与入力のブラー処理（フォーマット適用）
+   * 給与入力のブラー処理（フォーカスアウト時の処理）
    */
   const handleSalaryBlur = () => {
     // 空文字や空白のみの場合は何もしない
@@ -72,22 +72,11 @@ export default function InputForm({
       return
     }
     
-    // 元の値を保持
-    const originalValue = salary
-    
     // 数値として解析
     const numericValue = parseFormattedNumber(salary.trim())
     
-    // 数値として有効な場合は、必ずフォーマットする
-    if (numericValue > 0 && !isNaN(numericValue)) {
-      setSalary(formatNumber(numericValue))
-    } else {
-      // 無効な値の場合は元の値を保持
-      setSalary(originalValue)
-    }
-    
-    // 有効な数値の場合のみ計算を実行
-    if (numericValue > 0 && !isNaN(numericValue)) {
+    // 計算は正の数の場合のみ
+    if (numericValue > 0) {
       debouncedCalculate()
     }
   }
