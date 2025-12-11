@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import { APP_CONFIG, OGP_CONFIG } from './utils/constants'
+import { Analytics } from '@vercel/analytics/next'
 
 export const metadata: Metadata = {
   title: OGP_CONFIG.title,
@@ -159,6 +160,7 @@ export default function RootLayout({
             </div>
           </footer>
         </div>
+        <Analytics />
       </body>
     </html>
   )
