@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import './globals.css'
 import { APP_CONFIG, OGP_CONFIG } from './utils/constants'
 import { Analytics } from '@vercel/analytics/next'
+import HeaderNavigation from './components/HeaderNavigation'
 
 export const metadata: Metadata = {
   title: OGP_CONFIG.title,
@@ -118,6 +119,11 @@ export default function RootLayout({
               <p className="subtitle">
                 妊娠中・育休予定の方向け 手取り額シミュレーター
               </p>
+              <HeaderNavigation 
+                targetSite="maternity"
+                targetUrl="https://maternity-allowance-calculator.nexeed-web.com"
+                targetLabel="出産手当金シミュレーター"
+              />
             </div>
           </header>
 
