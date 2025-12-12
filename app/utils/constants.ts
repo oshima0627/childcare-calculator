@@ -27,11 +27,34 @@ export const INSURANCE_RATES = {
 
 // 税金計算用の定数
 export const TAX_CONSTANTS = {
+  // 基礎控除
   basicDeduction: 480000,        // 基礎控除（所得税）
   residentBasicDeduction: 430000, // 基礎控除（住民税）
+  
+  // 住民税
   residentEqualTax: 5000,        // 住民税均等割
-  salaryDeductionRate: 0.2,      // 給与所得控除率（簡易）
-  salaryDeductionMin: 550000,    // 給与所得控除最低額
+  residentIncomeRate: 0.10,      // 住民税所得割（市町村民税6% + 都道府県民税4%）
+  
+  // 給与所得控除（令和2年分以降）
+  salaryDeductionRanges: [
+    { max: 1625000, rate: 0, fixed: 550000 },                    // 162.5万円以下: 55万円
+    { max: 1800000, rate: 0.4, deduction: 100000 },             // 180万円以下: 収入×40%-10万円
+    { max: 3600000, rate: 0.3, deduction: 80000 },              // 360万円以下: 収入×30%-8万円
+    { max: 6600000, rate: 0.2, deduction: 440000 },             // 660万円以下: 収入×20%-44万円
+    { max: 8500000, rate: 0.1, deduction: 1100000 },            // 850万円以下: 収入×10%-110万円
+    { max: Infinity, rate: 0, fixed: 1950000 }                   // 850万円超: 195万円（上限）
+  ],
+  
+  // 所得税の税率表（令和5年分以降）
+  incomeTaxRanges: [
+    { max: 1950000, rate: 0.05, deduction: 0 },        // 195万円以下: 5%
+    { max: 3300000, rate: 0.10, deduction: 97500 },    // 330万円以下: 10% - 9.75万円
+    { max: 6950000, rate: 0.20, deduction: 427500 },   // 695万円以下: 20% - 42.75万円
+    { max: 9000000, rate: 0.23, deduction: 636000 },   // 900万円以下: 23% - 63.6万円
+    { max: 18000000, rate: 0.33, deduction: 1536000 }, // 1800万円以下: 33% - 153.6万円
+    { max: 40000000, rate: 0.40, deduction: 2796000 }, // 4000万円以下: 40% - 279.6万円
+    { max: Infinity, rate: 0.45, deduction: 4796000 }  // 4000万円超: 45% - 479.6万円
+  ]
 }
 
 // 育児休業給付金上限(2025年8月1日〜2026年7月31日)

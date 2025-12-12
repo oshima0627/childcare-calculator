@@ -104,44 +104,80 @@ function calculateSocialInsurance(
 }
 
 /**
- * 税金を計算(概算)
- * 所得税は年収ベースで計算し12で割る、住民税は前年所得ベースの概算
- * @param salary 月額総支給額
- * @returns 税金の詳細
+ * 給与所得控除を計算
+ * @param annualSalary 年収
+ * @returns 給与所得控除額
  */
-function calculateTax(salary: number): Tax {
-  const annualSalary = salary * 12
+function calculateSalaryDeduction(annualSalary: number): number {
+  for (const range of TAX_CONSTANTS.salaryDeductionRanges) {
+    if (annualSalary <= range.max) {
+      if (range.fixed !== undefined) {
+        return range.fixed
+      } else {
+        return Math.floor(annualSalary * range.rate - range.deduction)
+      }
+    }
+  }
+  return 1950000 // 上限
+}
+
+/**
+ * 所得税を計算（復興特別所得税含む）
+ * @param taxableIncome 課税所得
+ * @returns 年額所得税
+ */
+function calculateIncomeTax(taxableIncome: number): number {
+  if (taxableIncome <= 0) return 0
   
-  // 所得税計算（年額ベース）
-  // 給与所得控除: 年収195万円以下の場合は最低55万円
-  const salaryDeduction = Math.max(
-    TAX_CONSTANTS.salaryDeductionMin,
-    Math.min(annualSalary * TAX_CONSTANTS.salaryDeductionRate, 1950000 * TAX_CONSTANTS.salaryDeductionRate)
-  )
-  const taxableIncome = Math.max(0, annualSalary - salaryDeduction - TAX_CONSTANTS.basicDeduction)
-  
-  // 所得税率（累進税率による年額計算）
-  let annualIncomeTax = 0
-  if (taxableIncome <= 1950000) {
-    annualIncomeTax = taxableIncome * 0.05
-  } else if (taxableIncome <= 3300000) {
-    annualIncomeTax = 97500 + (taxableIncome - 1950000) * 0.10
-  } else if (taxableIncome <= 6950000) {
-    annualIncomeTax = 232500 + (taxableIncome - 3300000) * 0.20
-  } else {
-    // 695万円超は23%
-    annualIncomeTax = 962500 + (taxableIncome - 6950000) * 0.23
+  for (const range of TAX_CONSTANTS.incomeTaxRanges) {
+    if (taxableIncome <= range.max) {
+      const tax = Math.floor(taxableIncome * range.rate - range.deduction)
+      // 復興特別所得税（2.1%）を加算
+      return Math.floor(tax * 1.021)
+    }
   }
   
-  // 年額を12で割って月額に変換
+  // ここには到達しないはずだが、念のため
+  const maxRange = TAX_CONSTANTS.incomeTaxRanges[TAX_CONSTANTS.incomeTaxRanges.length - 1]
+  const tax = Math.floor(taxableIncome * maxRange.rate - maxRange.deduction)
+  return Math.floor(tax * 1.021)
+}
+
+/**
+ * 税金を計算（正確な計算）
+ * 給与所得控除・社会保険料控除・基礎控除を考慮した正確な計算
+ * @param salary 月額総支給額
+ * @param socialInsurance 社会保険料（年額）
+ * @returns 税金の詳細
+ */
+function calculateTax(salary: number, socialInsurance: SocialInsurance): Tax {
+  const annualSalary = salary * 12
+  const annualSocialInsurance = socialInsurance.total * 12
+  
+  // 1. 給与所得の計算
+  const salaryDeduction = calculateSalaryDeduction(annualSalary)
+  const salaryIncome = Math.max(0, annualSalary - salaryDeduction)
+  
+  // 2. 所得控除の計算
+  const totalDeductions = TAX_CONSTANTS.basicDeduction + annualSocialInsurance
+  
+  // 3. 課税所得の計算（所得税）
+  const taxableIncomeForIncomeTax = Math.max(0, salaryIncome - totalDeductions)
+  
+  // 4. 所得税の計算
+  const annualIncomeTax = calculateIncomeTax(taxableIncomeForIncomeTax)
+  
+  // 5. 住民税の計算
+  // 住民税の基礎控除は所得税より5万円少ない
+  const residentTaxDeductions = TAX_CONSTANTS.residentBasicDeduction + annualSocialInsurance
+  const taxableIncomeForResidentTax = Math.max(0, salaryIncome - residentTaxDeductions)
+  
+  // 住民税 = 均等割 + 所得割
+  const annualResidentTax = TAX_CONSTANTS.residentEqualTax + 
+    Math.floor(taxableIncomeForResidentTax * TAX_CONSTANTS.residentIncomeRate)
+  
+  // 月額に変換
   const monthlyIncomeTax = Math.floor(annualIncomeTax / 12)
-  
-  // 住民税計算（年額ベース）
-  // 住民税は前年所得ベースの概算
-  const residentTaxBase = Math.max(0, taxableIncome - (TAX_CONSTANTS.residentBasicDeduction - TAX_CONSTANTS.basicDeduction))
-  const annualResidentTax = TAX_CONSTANTS.residentEqualTax + (residentTaxBase * 0.10) // 均等割 + 所得割10%
-  
-  // 年額を12で割って月額に変換
   const monthlyResidentTax = Math.floor(annualResidentTax / 12)
   
   return {
@@ -162,7 +198,7 @@ function calculateCurrentIncome(
   age: 'under40' | 'over40'
 ): CurrentIncome {
   const socialInsurance = calculateSocialInsurance(salary, age)
-  const tax = calculateTax(salary)
+  const tax = calculateTax(salary, socialInsurance)
   const netIncome = salary - socialInsurance.total - tax.total
   
   return {
