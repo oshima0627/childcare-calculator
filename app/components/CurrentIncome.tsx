@@ -45,15 +45,6 @@ export default function CurrentIncome({ current }: CurrentIncomeProps) {
                 <div className="detail-amount">-{formatCurrency(socialInsurance.healthInsurance)}</div>
               </div>
               
-              <div className="detail-item">
-                <div className="detail-label">
-                  └ 介護保険料
-                  {socialInsurance.careInsurance === 0 && (
-                    <span className="age-note">(40歳未満のため0円)</span>
-                  )}
-                </div>
-                <div className="detail-amount">-{formatCurrency(socialInsurance.careInsurance)}</div>
-              </div>
               
               <div className="detail-item">
                 <div className="detail-label">└ 厚生年金保険料</div>

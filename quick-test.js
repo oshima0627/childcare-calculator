@@ -32,7 +32,6 @@ const TAX_CONSTANTS = {
 // 社会保険料率
 const INSURANCE_RATES = {
   health: 0.10,
-  care: 0.0159,
   pension: 0.183,
   employment: 0.006,
 };
@@ -62,17 +61,15 @@ function calculateIncomeTax(taxableIncome) {
   return 0;
 }
 
-// テストケース: 月給30万円、40歳未満
+// テストケース: 月給30万円
 const salary = 300000;
-const age = 'under40';
 const annualSalary = salary * 12; // 360万円
 
 // 社会保険料計算（簡易）
 const healthInsurance = Math.floor(salary * INSURANCE_RATES.health / 2);
-const careInsurance = age === 'over40' ? Math.floor(salary * INSURANCE_RATES.care / 2) : 0;
 const pensionInsurance = Math.floor(salary * INSURANCE_RATES.pension / 2);
 const employmentInsurance = Math.floor(salary * INSURANCE_RATES.employment);
-const totalSocialInsurance = healthInsurance + careInsurance + pensionInsurance + employmentInsurance;
+const totalSocialInsurance = healthInsurance + pensionInsurance + employmentInsurance;
 const annualSocialInsurance = totalSocialInsurance * 12;
 
 // 1. 給与所得控除

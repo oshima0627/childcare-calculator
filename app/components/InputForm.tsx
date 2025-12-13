@@ -2,7 +2,7 @@
 
 /**
  * 入力フォームコンポーネント
- * ユーザーの月額総支給額と年齢を入力
+ * ユーザーの月額総支給額を入力
  */
 
 import { useState, useEffect, useCallback, useRef } from 'react'
@@ -15,12 +15,10 @@ import './InputForm.css'
 export default function InputForm({
   onCalculate,
   initialSalary = 0,
-  initialAge = 'under40',
 }: InputFormProps) {
   const [salary, setSalary] = useState<string>(
     initialSalary > 0 ? formatInputNumber(String(initialSalary)) : ''
   )
-  const [age, setAge] = useState<'under40' | 'over40'>(initialAge)
   const [error, setError] = useState<ValidationError | null>(null)
   const debounceTimerRef = useRef<NodeJS.Timeout | null>(null)
 
@@ -37,10 +35,9 @@ export default function InputForm({
     if (!validation || validation.type !== 'error') {
       onCalculate({
         salary: numericSalary,
-        age,
       })
     }
-  }, [salary, age, onCalculate])
+  }, [salary, onCalculate])
 
   /**
    * デバウンス付きの計算実行
@@ -81,22 +78,7 @@ export default function InputForm({
     }
   }
 
-  /**
-   * 年齢選択の変更処理
-   */
-  const handleAgeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newAge = event.target.value as 'under40' | 'over40'
-    setAge(newAge)
-  }
 
-  /**
-   * 年齢が変更された時の自動計算
-   */
-  useEffect(() => {
-    if (salary && parseFormattedNumber(salary) > 0) {
-      debouncedCalculate()
-    }
-  }, [age, salary, debouncedCalculate])
 
   /**
    * 初期値が設定されている場合の自動計算
@@ -153,42 +135,6 @@ export default function InputForm({
         <p className="form-help">
           賞与（ボーナス）は含めず、月額の総支給額を入力してください
         </p>
-      </div>
-      
-      <div className="form-group">
-        <fieldset>
-          <legend>
-            年齢
-            <span className="required">*</span>
-          </legend>
-          <div className="radio-group">
-            <label className="radio-label">
-              <input
-                type="radio"
-                name="age"
-                value="under40"
-                checked={age === 'under40'}
-                onChange={handleAgeChange}
-                aria-describedby="age-help"
-              />
-              <span className="radio-text">40歳未満</span>
-            </label>
-            <label className="radio-label">
-              <input
-                type="radio"
-                name="age"
-                value="over40"
-                checked={age === 'over40'}
-                onChange={handleAgeChange}
-                aria-describedby="age-help"
-              />
-              <span className="radio-text">40歳以上</span>
-            </label>
-          </div>
-          <p id="age-help" className="form-help">
-            介護保険料の計算に影響します
-          </p>
-        </fieldset>
       </div>
       
       <div className="form-status">

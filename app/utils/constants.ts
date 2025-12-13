@@ -20,7 +20,6 @@ export const STANDARD_MONTHLY_REMUNERATION_TABLE = [
 // 保険料率(2025年度)
 export const INSURANCE_RATES = {
   health: 0.10,           // 健康保険料率(全国平均、労使折半)
-  care: 0.0159,           // 介護保険料率(40歳以上、労使折半)
   pension: 0.183,         // 厚生年金保険料率(労使折半)
   employment: 0.006,      // 雇用保険料率(労働者負担分)
 }

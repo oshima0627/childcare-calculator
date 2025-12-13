@@ -5,13 +5,11 @@
 // 入力値の型
 export interface CalculatorInput {
   salary: number
-  age: 'under40' | 'over40'
 }
 
 // 社会保険料の型
 export interface SocialInsurance {
   healthInsurance: number      // 健康保険料
-  careInsurance: number        // 介護保険料(40歳以上のみ)
   pensionInsurance: number     // 厚生年金保険料
   employmentInsurance: number  // 雇用保険料
   total: number                // 合計
@@ -71,7 +69,7 @@ export interface CalculationResult {
 
 // バリデーションエラーの型
 export interface ValidationError {
-  field: 'salary' | 'age'
+  field: 'salary'
   message: string
   type: 'error' | 'warning'
 }
@@ -80,7 +78,6 @@ export interface ValidationError {
 export interface InputFormProps {
   onCalculate: (input: CalculatorInput) => void
   initialSalary?: number
-  initialAge?: 'under40' | 'over40'
 }
 
 // ResultDisplay コンポーネントの Props

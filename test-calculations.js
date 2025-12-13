@@ -23,7 +23,6 @@ const STANDARD_MONTHLY_REMUNERATION_TABLE = [
 
 const INSURANCE_RATES = {
   health: 0.10,
-  care: 0.0159,
   pension: 0.183,
   employment: 0.006,
 };
@@ -73,21 +72,17 @@ function getStandardMonthlyRemuneration(salary) {
   return maxRemuneration;
 }
 
-function calculateSocialInsurance(salary, age) {
+function calculateSocialInsurance(salary) {
   const standardRemuneration = getStandardMonthlyRemuneration(salary);
   
   const healthInsurance = Math.floor(standardRemuneration * INSURANCE_RATES.health / 2);
-  const careInsurance = age === 'over40' 
-    ? Math.floor(standardRemuneration * INSURANCE_RATES.care / 2)
-    : 0;
   const pensionInsurance = Math.floor(standardRemuneration * INSURANCE_RATES.pension / 2);
   const employmentInsurance = Math.floor(salary * INSURANCE_RATES.employment);
   
-  const total = healthInsurance + careInsurance + pensionInsurance + employmentInsurance;
+  const total = healthInsurance + pensionInsurance + employmentInsurance;
   
   return {
     healthInsurance,
-    careInsurance,
     pensionInsurance,
     employmentInsurance,
     total,
@@ -164,11 +159,10 @@ function calculateChildcareBenefit(salary) {
 
 // テストケース
 const testCases = [
-  { salary: 200000, age: 'under40', description: '月給20万円、40歳未満' },
-  { salary: 300000, age: 'under40', description: '月給30万円、40歳未満' },
-  { salary: 300000, age: 'over40', description: '月給30万円、40歳以上' },
-  { salary: 400000, age: 'over40', description: '月給40万円、40歳以上' },
-  { salary: 500000, age: 'over40', description: '月給50万円、40歳以上（上限テスト）' },
+  { salary: 200000, description: '月給20万円' },
+  { salary: 300000, description: '月給30万円' },
+  { salary: 400000, description: '月給40万円' },
+  { salary: 500000, description: '月給50万円（上限テスト）' },
 ];
 
 console.log('=== 育児休業給付金シミュレーター 計算テスト ===\n');
@@ -177,7 +171,7 @@ testCases.forEach((testCase, index) => {
   console.log(`テストケース ${index + 1}: ${testCase.description}`);
   console.log('-------------------------------------------');
   
-  const socialInsurance = calculateSocialInsurance(testCase.salary, testCase.age);
+  const socialInsurance = calculateSocialInsurance(testCase.salary);
   const tax = calculateTax(testCase.salary);
   const childcare = calculateChildcareBenefit(testCase.salary);
   const netIncome = testCase.salary - socialInsurance.total - tax.total;
@@ -188,9 +182,6 @@ testCases.forEach((testCase, index) => {
   
   console.log('社会保険料:');
   console.log(`  健康保険: ${socialInsurance.healthInsurance.toLocaleString()}円`);
-  if (testCase.age === 'over40') {
-    console.log(`  介護保険: ${socialInsurance.careInsurance.toLocaleString()}円`);
-  }
   console.log(`  厚生年金: ${socialInsurance.pensionInsurance.toLocaleString()}円`);
   console.log(`  雇用保険: ${socialInsurance.employmentInsurance.toLocaleString()}円`);
   console.log(`  合計: ${socialInsurance.total.toLocaleString()}円`);

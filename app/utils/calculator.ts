@@ -67,8 +67,7 @@ function getStandardMonthlyRemuneration(salary: number): number {
  * @returns 社会保険料の詳細
  */
 function calculateSocialInsurance(
-  salary: number,
-  age: 'under40' | 'over40'
+  salary: number
 ): SocialInsurance {
   const standardRemuneration = getStandardMonthlyRemuneration(salary)
   
@@ -77,10 +76,6 @@ function calculateSocialInsurance(
     standardRemuneration * INSURANCE_RATES.health / 2
   )
   
-  // 介護保険料(40歳以上のみ、労働者負担分)
-  const careInsurance = age === 'over40'
-    ? Math.floor(standardRemuneration * INSURANCE_RATES.care / 2)
-    : 0
   
   // 厚生年金保険料(労働者負担分)
   const pensionInsurance = Math.floor(
@@ -92,11 +87,10 @@ function calculateSocialInsurance(
     salary * INSURANCE_RATES.employment
   )
   
-  const total = healthInsurance + careInsurance + pensionInsurance + employmentInsurance
+  const total = healthInsurance + pensionInsurance + employmentInsurance
   
   return {
     healthInsurance,
-    careInsurance,
     pensionInsurance,
     employmentInsurance,
     total,
@@ -194,10 +188,9 @@ function calculateTax(salary: number, socialInsurance: SocialInsurance): Tax {
  * @returns 現在の収支詳細
  */
 function calculateCurrentIncome(
-  salary: number,
-  age: 'under40' | 'over40'
+  salary: number
 ): CurrentIncome {
-  const socialInsurance = calculateSocialInsurance(salary, age)
+  const socialInsurance = calculateSocialInsurance(salary)
   const tax = calculateTax(salary, socialInsurance)
   const netIncome = salary - socialInsurance.total - tax.total
   
@@ -326,7 +319,7 @@ function calculateEnhancedBenefit(salary: number): EnhancedBenefit {
  * @returns 計算結果全体
  */
 export function calculate(input: CalculatorInput): CalculationResult {
-  const current = calculateCurrentIncome(input.salary, input.age)
+  const current = calculateCurrentIncome(input.salary)
   const childcare = calculateChildcareBenefit(input.salary)
   const enhancedBenefit = calculateEnhancedBenefit(input.salary)
   

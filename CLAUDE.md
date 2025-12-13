@@ -39,7 +39,7 @@
 - 育休給付金の金額を知りたい人
 
 ### 1.3 主要機能
-- 月額総支給額と年齢を入力
+- 月額総支給額を入力
 - 現在の手取り額と育休中の給付金額を自動計算
 - 通常時と育休時の収入を横棒グラフで視覚的に比較
 - 12ヶ月分の詳細な給付金内訳を表示
@@ -160,13 +160,11 @@ childcare-calculator/
 // 入力値の型
 export interface CalculatorInput {
   salary: number;
-  age: 'under40' | 'over40';
 }
 
 // 社会保険料の型
 export interface SocialInsurance {
   healthInsurance: number;      // 健康保険料
-  careInsurance: number;        // 介護保険料(40歳以上のみ)
   pensionInsurance: number;     // 厚生年金保険料
   employmentInsurance: number;  // 雇用保険料
   total: number;                // 合計
@@ -213,7 +211,7 @@ export interface CalculationResult {
 
 // バリデーションエラーの型
 export interface ValidationError {
-  field: 'salary' | 'age';
+  field: 'salary';
   message: string;
   type: 'error' | 'warning';
 }
@@ -243,7 +241,6 @@ export const STANDARD_MONTHLY_REMUNERATION_TABLE = [
 // 保険料率(2025年度)
 export const INSURANCE_RATES = {
   health: 0.10,           // 健康保険料率(全国平均、労使折半)
-  care: 0.0159,           // 介護保険料率(40歳以上、労使折半)
   pension: 0.183,         // 厚生年金保険料率(労使折半)
   employment: 0.006,      // 雇用保険料率(労働者負担分)
 };
@@ -326,8 +323,7 @@ function getStandardMonthlyRemuneration(salary: number): number {
  * 社会保険料を計算
  */
 function calculateSocialInsurance(
-  salary: number,
-  age: 'under40' | 'over40'
+  salary: number
 ): SocialInsurance {
   const standardRemuneration = getStandardMonthlyRemuneration(salary);
   
@@ -336,10 +332,6 @@ function calculateSocialInsurance(
     standardRemuneration * INSURANCE_RATES.health / 2
   );
   
-  // 介護保険料(40歳以上のみ、労働者負担分)
-  const careInsurance = age === 'over40'
-    ? Math.floor(standardRemuneration * INSURANCE_RATES.care / 2)
-    : 0;
   
   // 厚生年金保険料(労働者負担分)
   const pensionInsurance = Math.floor(
@@ -351,11 +343,10 @@ function calculateSocialInsurance(
     salary * INSURANCE_RATES.employment
   );
   
-  const total = healthInsurance + careInsurance + pensionInsurance + employmentInsurance;
+  const total = healthInsurance + pensionInsurance + employmentInsurance;
   
   return {
     healthInsurance,
-    careInsurance,
     pensionInsurance,
     employmentInsurance,
     total,
@@ -380,10 +371,9 @@ function calculateTax(salary: number): Tax {
  * 現在の収支を計算
  */
 function calculateCurrentIncome(
-  salary: number,
-  age: 'under40' | 'over40'
+  salary: number
 ): CurrentIncome {
-  const socialInsurance = calculateSocialInsurance(salary, age);
+  const socialInsurance = calculateSocialInsurance(salary);
   const tax = calculateTax(salary);
   const netIncome = salary - socialInsurance.total - tax.total;
   
@@ -452,7 +442,7 @@ function calculateChildcareBenefit(salary: number): ChildcareBenefit {
  * メイン計算関数
  */
 export function calculate(input: CalculatorInput): CalculationResult {
-  const current = calculateCurrentIncome(input.salary, input.age);
+  const current = calculateCurrentIncome(input.salary);
   const childcare = calculateChildcareBenefit(input.salary);
   
   // 維持率を計算(手取りに対する給付金の割合)
@@ -561,7 +551,7 @@ export function parseFormattedNumber(value: string): number {
 - ローディングインジケーターは不要(計算は瞬時)
 
 ### 6.4 URLパラメータ
-- `?salary=300000&age=under40` 形式でアクセス可能
+- `?salary=300000` 形式でアクセス可能
 - パラメータがある場合は自動的に入力欄を埋めて計算を実行
 - 共有用ではなく、開発・テスト用途
 
@@ -971,9 +961,9 @@ import { Analytics } from '@vercel/analytics/next'
 
 ### 14.1 計算ロジックのテスト
 
-**ケース1: 標準的な給与(30万円、40歳未満)**
+**ケース1: 標準的な給与(30万円)**
 ```typescript
-Input: { salary: 300000, age: 'under40' }
+Input: { salary: 300000 }
 Expected:
   - 標準報酬月額: 300000
   - 健康保険料: 15000
@@ -988,9 +978,9 @@ Expected:
   - 7-12ヶ月給付金: 150000
 ```
 
-**ケース2: 上限超過(100万円、40歳以上)**
+**ケース2: 上限超過(100万円)**
 ```typescript
-Input: { salary: 1000000, age: 'over40' }
+Input: { salary: 1000000 }
 Expected:
   - 賃金日額: 16110(上限適用)
   - isUpperLimit: true
@@ -1094,7 +1084,6 @@ npm run dev
 ┌─────────────────────────────────────────┐
 │  [入力フォーム]                         │
 │  月額総支給額: [300,000] 円             │
-│  年齢: ○ 40歳未満  ○ 40歳以上          │
 └─────────────────────────────────────────┘
 
 ┌─────────────────────────────────────────┐
@@ -1158,7 +1147,7 @@ npm run dev
 
 ### 18.2 データフロー
 ```
-1. ユーザーが月額総支給額と年齢を入力
+1. ユーザーが月額総支給額を入力
 2. デバウンス(500ms)
 3. バリデーション実行
 4. エラーがなければ計算実行
