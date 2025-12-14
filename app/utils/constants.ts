@@ -136,7 +136,7 @@ export const FAQ_DATA = [
 export const APP_CONFIG = {
   title: '育児休業給付金シミュレーター',
   description: '育児休業給付金の手取り額を簡単に計算できるシミュレーターです。',
-  url: process.env.NEXT_PUBLIC_APP_URL || 'https://childcare-calculator.vercel.app',
+  url: process.env.NEXT_PUBLIC_APP_URL || 'https://childcare-calculator.nexeed-web.com',
   gaId: process.env.NEXT_PUBLIC_GA_ID || '',
 }
 
