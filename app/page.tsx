@@ -56,7 +56,7 @@ export default function HomePage() {
       <div className="intro-section">
         <h2>育児休業給付金を簡単計算</h2>
         <p className="intro-text">
-          月額給与と年齢を入力するだけで、育児休業給付金の手取り額を自動計算。
+          月額給与を入力するだけで、育児休業給付金の手取り額を自動計算。
           現在の手取りとの比較もできます。
         </p>
         <div className="features">
