@@ -110,13 +110,6 @@ export default function HomePage() {
             <div className="step">
               <div className="step-number">2</div>
               <div className="step-content">
-                <h3>年齢を選択</h3>
-                <p>40歳未満か40歳以上かを選択してください</p>
-              </div>
-            </div>
-            <div className="step">
-              <div className="step-number">3</div>
-              <div className="step-content">
                 <h3>結果を確認</h3>
                 <p>自動で計算結果が表示されます</p>
               </div>
