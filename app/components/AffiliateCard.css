@@ -1,0 +1,93 @@
+/**
+ * アフィリエイトカードのスタイル
+ */
+
+.affiliate-card {
+  background: var(--color-white);
+  border-radius: var(--border-radius);
+  padding: var(--spacing-lg);
+  margin: var(--spacing-xl) 0;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--color-border);
+  text-align: center;
+  position: relative;
+}
+
+.affiliate-label {
+  position: absolute;
+  top: var(--spacing-sm);
+  left: var(--spacing-sm);
+  background: #999;
+  color: var(--color-white);
+  font-size: var(--font-size-xs);
+  padding: 2px 8px;
+  border-radius: 3px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.affiliate-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.affiliate-link {
+  display: block;
+  text-decoration: none;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.affiliate-link:hover {
+  transform: translateY(-2px);
+  opacity: 0.9;
+}
+
+.affiliate-link:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 4px;
+  border-radius: var(--border-radius);
+}
+
+.affiliate-banner {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  border-radius: var(--border-radius);
+  border: 1px solid var(--color-border);
+}
+
+.affiliate-tracking {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* モバイル対応 */
+@media (max-width: 768px) {
+  .affiliate-card {
+    padding: var(--spacing-md);
+    margin: var(--spacing-lg) 0;
+  }
+
+  .affiliate-banner {
+    /* モバイルでは336pxより小さい画面でも表示されるように */
+    max-width: 100%;
+    width: auto;
+  }
+}
+
+/* 小さい画面での調整 */
+@media (max-width: 360px) {
+  .affiliate-card {
+    padding: var(--spacing-sm);
+  }
+
+  .affiliate-label {
+    font-size: 10px;
+    padding: 1px 6px;
+  }
+}
