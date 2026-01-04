@@ -14,6 +14,7 @@ import EnhancedBenefit from './components/EnhancedBenefit'
 import MonthlyTable from './components/MonthlyTable'
 import SocialShare from './components/SocialShare'
 import FAQ from './components/FAQ'
+import AffiliateCard from './components/AffiliateCard'
 import { calculate } from './utils/calculator'
 import { formatCurrency, formatPercent } from './utils/formatter'
 import type { CalculatorInput, CalculationResult } from './types'
@@ -92,6 +93,7 @@ export default function HomePage() {
             normalBenefit={result.childcare.monthlyBenefits[0].benefit}
           />
           <MonthlyTable monthlyBenefits={result.childcare.monthlyBenefits} />
+          <AffiliateCard />
           <SocialShare result={result} />
         </div>
       )}
@@ -119,6 +121,8 @@ export default function HomePage() {
       )}
 
       <FAQ />
+
+      <AffiliateCard />
 
       <style jsx>{`
         .main-content {
