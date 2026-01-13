@@ -155,7 +155,7 @@ export default function RootLayout({
               
               <div className="footer-bottom">
                 <p>
-                  &copy; 2025 育児休業給付金シミュレーター. 
+                  &copy; 2025 Nexeed Lab.
                   データ出典: 厚生労働省
                 </p>
               </div>
