@@ -6,9 +6,14 @@ export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
 
 export default async function Image() {
-  const fontData = await fetch(
-    'https://fonts.gstatic.com/s/notosansjp/v53/-F6jfjtqLzI2JPCgQBnw7HFyzSD-AsregP8VFBEj75s.woff2'
-  ).then((res) => res.arrayBuffer())
+  let fontData: ArrayBuffer | null = null
+  try {
+    fontData = await fetch(
+      'https://fonts.gstatic.com/s/notosansjp/v53/-F6jfjtqLzI2JPCgQBnw7HFyzSD-AsregP8VFBEj75s.woff2'
+    ).then((res) => res.arrayBuffer())
+  } catch {
+    // フォント取得失敗時はシステムフォントにフォールバック
+  }
 
   return new ImageResponse(
     (
@@ -156,14 +161,18 @@ export default async function Image() {
     ),
     {
       ...size,
-      fonts: [
-        {
-          name: 'Noto Sans JP',
-          data: fontData,
-          style: 'normal',
-          weight: 700,
-        },
-      ],
+      ...(fontData
+        ? {
+            fonts: [
+              {
+                name: 'Noto Sans JP',
+                data: fontData,
+                style: 'normal' as const,
+                weight: 700,
+              },
+            ],
+          }
+        : {}),
     }
   )
 }

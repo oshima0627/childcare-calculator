@@ -5,6 +5,7 @@ import { Analytics } from '@vercel/analytics/next'
 import HeaderNavigation from './components/HeaderNavigation'
 
 export const metadata: Metadata = {
+  metadataBase: new URL(APP_CONFIG.url),
   title: OGP_CONFIG.title,
   description: OGP_CONFIG.description,
   keywords: [
