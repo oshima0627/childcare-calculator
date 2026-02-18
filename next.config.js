@@ -16,8 +16,20 @@ const nextConfig = {
   // PWA対応準備
   headers: async () => {
     return [
+      // OGP画像: 24時間キャッシュ（immutableなし、更新可能にする）
+      // Threads・FacebookなどMetaクローラーが定期的に再取得できるようにする
       {
-        source: '/(.*)',
+        source: '/opengraph-image',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=86400, must-revalidate',
+          },
+        ],
+      },
+      // Next.js静的アセット（ファイル名にハッシュ含む）: 長期immutableキャッシュ
+      {
+        source: '/_next/static/(.*)',
         headers: [
           {
             key: 'Cache-Control',
@@ -25,8 +37,9 @@ const nextConfig = {
           },
         ],
       },
+      // HTMLページ: 常に再検証
       {
-        source: '/',
+        source: '/(.*)',
         headers: [
           {
             key: 'Cache-Control',
