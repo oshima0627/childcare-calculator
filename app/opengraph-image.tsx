@@ -6,15 +6,6 @@ export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
 
 export default async function Image() {
-  let fontData: ArrayBuffer | null = null
-  try {
-    fontData = await fetch(
-      'https://fonts.gstatic.com/s/notosansjp/v53/-F6jfjtqLzI2JPCgQBnw7HFyzSD-AsregP8VFBEj75s.woff2'
-    ).then((res) => res.arrayBuffer())
-  } catch {
-    // フォント取得失敗時はシステムフォントにフォールバック
-  }
-
   return new ImageResponse(
     (
       <div
@@ -25,154 +16,119 @@ export default async function Image() {
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
-          background: 'linear-gradient(135deg, #1565C0 0%, #2196F3 50%, #42A5F5 100%)',
-          position: 'relative',
-          fontFamily: '"Noto Sans JP", sans-serif',
+          background: 'linear-gradient(135deg, #1565C0 0%, #2196F3 60%, #42A5F5 100%)',
+          fontFamily: 'sans-serif',
+          padding: '60px 80px',
+          gap: '0px',
         }}
       >
-        {/* 背景の装飾サークル */}
-        <div
-          style={{
-            position: 'absolute',
-            top: '-80px',
-            right: '-80px',
-            width: '400px',
-            height: '400px',
-            borderRadius: '50%',
-            background: 'rgba(255,255,255,0.06)',
-            display: 'flex',
-          }}
-        />
-        <div
-          style={{
-            position: 'absolute',
-            bottom: '-100px',
-            left: '-60px',
-            width: '350px',
-            height: '350px',
-            borderRadius: '50%',
-            background: 'rgba(255,255,255,0.06)',
-            display: 'flex',
-          }}
-        />
-
-        {/* メインコンテンツ */}
+        {/* バッジ */}
         <div
           style={{
             display: 'flex',
-            flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center',
-            padding: '0 80px',
-            gap: '0px',
-            zIndex: 1,
+            background: 'rgba(255,255,255,0.2)',
+            borderRadius: '30px',
+            padding: '10px 28px',
+            marginBottom: '36px',
+            border: '1px solid rgba(255,255,255,0.4)',
           }}
         >
-          {/* バッジ */}
+          <span style={{ color: '#ffffff', fontSize: '22px', fontWeight: 600, display: 'flex' }}>
+            育休 · 手取り計算ツール
+          </span>
+        </div>
+
+        {/* タイトル1行目 */}
+        <div
+          style={{
+            display: 'flex',
+            fontSize: '76px',
+            fontWeight: 700,
+            color: '#ffffff',
+            lineHeight: 1.2,
+            marginBottom: '4px',
+          }}
+        >
+          育児休業給付金
+        </div>
+
+        {/* タイトル2行目 */}
+        <div
+          style={{
+            display: 'flex',
+            fontSize: '76px',
+            fontWeight: 700,
+            color: '#ffffff',
+            lineHeight: 1.2,
+            marginBottom: '32px',
+          }}
+        >
+          シミュレーター
+        </div>
+
+        {/* サブタイトル */}
+        <div
+          style={{
+            display: 'flex',
+            fontSize: '28px',
+            color: 'rgba(255,255,255,0.9)',
+            marginBottom: '44px',
+          }}
+        >
+          月額給与を入力するだけ。育休中の手取り額を自動計算。
+        </div>
+
+        {/* 特徴バッジ（.map()を使わずハードコード） */}
+        <div
+          style={{
+            display: 'flex',
+            gap: '16px',
+          }}
+        >
           <div
             style={{
               display: 'flex',
-              alignItems: 'center',
-              background: 'rgba(255,255,255,0.2)',
-              borderRadius: '30px',
-              padding: '8px 24px',
-              marginBottom: '32px',
-              border: '1px solid rgba(255,255,255,0.35)',
+              background: 'rgba(255,255,255,0.15)',
+              borderRadius: '8px',
+              padding: '12px 20px',
+              border: '1px solid rgba(255,255,255,0.3)',
             }}
           >
-            <span style={{ color: '#fff', fontSize: '20px', fontWeight: 600 }}>
-              育休 · 手取り計算ツール
+            <span style={{ color: '#ffffff', fontSize: '18px', display: 'flex' }}>
+              ✓ 67%・50%の給付率を計算
             </span>
           </div>
-
-          {/* タイトル */}
           <div
             style={{
-              fontSize: '72px',
-              fontWeight: 700,
-              color: '#ffffff',
-              textAlign: 'center',
-              lineHeight: 1.25,
-              marginBottom: '28px',
-              textShadow: '0 2px 12px rgba(0,0,0,0.2)',
               display: 'flex',
+              background: 'rgba(255,255,255,0.15)',
+              borderRadius: '8px',
+              padding: '12px 20px',
+              border: '1px solid rgba(255,255,255,0.3)',
             }}
           >
-            育児休業給付金
+            <span style={{ color: '#ffffff', fontSize: '18px', display: 'flex' }}>
+              ✓ 12ヶ月分の詳細表示
+            </span>
           </div>
           <div
             style={{
-              fontSize: '72px',
-              fontWeight: 700,
-              color: '#ffffff',
-              textAlign: 'center',
-              lineHeight: 1.25,
-              marginBottom: '36px',
-              textShadow: '0 2px 12px rgba(0,0,0,0.2)',
               display: 'flex',
+              background: 'rgba(255,255,255,0.15)',
+              borderRadius: '8px',
+              padding: '12px 20px',
+              border: '1px solid rgba(255,255,255,0.3)',
             }}
           >
-            シミュレーター
-          </div>
-
-          {/* サブタイトル */}
-          <div
-            style={{
-              fontSize: '30px',
-              color: 'rgba(255,255,255,0.9)',
-              textAlign: 'center',
-              lineHeight: 1.6,
-              marginBottom: '40px',
-              display: 'flex',
-            }}
-          >
-            月額給与を入力するだけ。育休中の手取り額を自動計算。
-          </div>
-
-          {/* 特徴バッジ一覧 */}
-          <div
-            style={{
-              display: 'flex',
-              gap: '16px',
-            }}
-          >
-            {['67%・50%の給付率を計算', '12ヶ月分の詳細表示', '社会保険料・税金も考慮'].map(
-              (text) => (
-                <div
-                  key={text}
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    background: 'rgba(255,255,255,0.15)',
-                    borderRadius: '8px',
-                    padding: '10px 18px',
-                    border: '1px solid rgba(255,255,255,0.25)',
-                  }}
-                >
-                  <span style={{ color: '#fff', fontSize: '18px', fontWeight: 500 }}>
-                    ✓ {text}
-                  </span>
-                </div>
-              )
-            )}
+            <span style={{ color: '#ffffff', fontSize: '18px', display: 'flex' }}>
+              ✓ 社会保険料・税金も考慮
+            </span>
           </div>
         </div>
       </div>
     ),
-    {
-      ...size,
-      ...(fontData
-        ? {
-            fonts: [
-              {
-                name: 'Noto Sans JP',
-                data: fontData,
-                style: 'normal' as const,
-                weight: 700,
-              },
-            ],
-          }
-        : {}),
-    }
+    { ...size }
   )
 }
