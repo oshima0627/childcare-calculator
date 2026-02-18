@@ -36,6 +36,14 @@ export const metadata: Metadata = {
     description: OGP_CONFIG.description,
     locale: 'ja_JP',
     url: APP_CONFIG.url,
+    images: [
+      {
+        url: `${APP_CONFIG.url}/opengraph-image`,
+        width: 1200,
+        height: 630,
+        alt: OGP_CONFIG.title,
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
@@ -43,6 +51,7 @@ export const metadata: Metadata = {
     description: OGP_CONFIG.description,
     site: '@childcare_calc',
     creator: '@childcare_calc',
+    images: [`${APP_CONFIG.url}/opengraph-image`],
   },
   robots: {
     index: true,
