@@ -1,7 +1,8 @@
 import { ImageResponse } from 'next/og'
 
-export const runtime = 'edge'
-export const alt = '育児休業給付金シミュレーター | 手取り額を簡単計算'
+// output: 'export'（静的エクスポート）ではビルド時にPNGを生成する
+export const dynamic = 'force-static'
+export const alt ='育児休業給付金シミュレーター | 手取り額を簡単計算'
 export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
 

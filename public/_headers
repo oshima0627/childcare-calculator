@@ -1,0 +1,19 @@
+# Cloudflare（Workers 静的アセット / Pages）用のレスポンスヘッダー設定
+# 静的エクスポートでは next.config の headers() が無効になるため、ここで定義する
+# ルールは上から順に適用され、後にマッチしたものが優先される
+
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(), microphone=(), camera=()
+
+# Next.js静的アセット（ファイル名にハッシュ含む）: 長期immutableキャッシュ
+/_next/static/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# OGP画像: ビルド時に拡張子なしのファイルとして出力されるため MIME を明示する
+# 24時間キャッシュ（immutableなし、Metaクローラーが再取得できるようにする）
+/opengraph-image
+  Content-Type: image/png
+  Cache-Control: public, max-age=86400, must-revalidate

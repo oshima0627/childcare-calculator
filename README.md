@@ -137,3 +137,12 @@ ISC License
 ---
 
 **データ出典**: 厚生労働省「育児休業給付の内容と支給申請手続」「令和7年度健康保険・厚生年金保険の保険料額表」
+
+## デプロイ（Cloudflare）
+
+静的エクスポート（`out/`）を Cloudflare で配信します。手順は [CLOUDFLARE.md](./CLOUDFLARE.md) を参照してください。
+
+```bash
+npm run preview   # ローカルで本番と同じ配信を確認
+npm run deploy    # ビルドして Cloudflare にデプロイ
+```
