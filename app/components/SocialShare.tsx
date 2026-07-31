@@ -43,7 +43,7 @@ export default function SocialShare({ result }: SocialShareProps) {
     if (typeof window !== 'undefined') {
       return window.location.origin
     }
-    return 'https://childcare-calculator.nexeed-lab.com'
+    return 'https://childcare.nexeed-lab.com'
   }
 
   /**
