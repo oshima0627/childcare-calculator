@@ -858,8 +858,11 @@ NEXT_PUBLIC_GA_ID=G-47317RL34T
 ### 13.1 リポジトリ情報
 - **GitHubリポジトリ:** https://github.com/oshima0627/childcare-calculator
 - **ユーザー名:** oshima0627
-- **Personal Access Token:** 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
 - **ブランチ:** main
+- **認証方式:** SSH（13.5参照）
+
+> **注意:** 認証情報（Personal Access Token・パスワード等）はこのファイルに記載しないこと。
+> リポジトリにコミットされ、閲覧できる全員に漏洩します。
 
 ### 13.2 基本的なGitコマンド
 
@@ -883,10 +886,11 @@ git status
 git log --oneline -10
 ```
 
-### 13.3 認証付きリモートURL
+### 13.3 リモートURL
 ```
-https://oshima0627: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@github.com/oshima0627/childcare-calculator.git
+git@github.com:oshima0627/childcare-calculator.git
 ```
+SSHキーで認証します（13.5参照）。トークンを埋め込んだHTTPS URLは使用しないこと。
 
 ### 13.4 初期セットアップ（既に完了）
 ```bash
@@ -897,7 +901,7 @@ git config user.name "oshima0627"
 git config user.email "oshimanaotaka0627@example.com"
 
 # リモートリポジトリ追加（完了済み）
-git remote add origin https://oshima0627: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@github.com/oshima0627/childcare-calculator.git
+git remote add origin git@github.com:oshima0627/childcare-calculator.git
 
 # 初回プッシュ（完了済み）
 git add .
