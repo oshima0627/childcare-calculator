@@ -1,6 +1,9 @@
 # デプロイメントガイド
 
-## 🚀 Vercelへのデプロイ（推奨）
+> **現在の本番デプロイ先は Cloudflare です。手順は [CLOUDFLARE.md](./CLOUDFLARE.md) を参照してください。**
+> 以下は Vercel を利用していた頃の記録です。
+
+## 🚀 Vercelへのデプロイ（旧構成）
 
 ### 1. Vercelアカウント準備
 1. [Vercel](https://vercel.com)でアカウント作成
@@ -23,29 +26,12 @@ Vercelダッシュボードで以下を設定：
 
 ```
 NEXT_PUBLIC_APP_URL=https://your-domain.vercel.app
-NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX
 NEXT_PUBLIC_GOOGLE_VERIFICATION=verification_code
 ```
 
 ### 4. 自動デプロイ設定
 - mainブランチへのプッシュで自動デプロイ
 - プレビューデプロイは全ブランチで実行
-
-## 📊 Google Analytics設定
-
-### 1. GA4プロパティ作成
-1. [Google Analytics](https://analytics.google.com)でプロパティ作成
-2. 測定IDをコピー（G-XXXXXXXXXX）
-
-### 2. 環境変数設定
-```
-NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX
-```
-
-### 3. 追跡イベント
-自動で以下のイベントを送信：
-- `calculate`: 計算実行時
-- `share`: ソーシャル共有時
 
 ## 🔍 Google Search Console設定
 
@@ -137,15 +123,10 @@ vercel logs
 
 ## 📊 監視・分析
 
-### 1. Vercel Analytics
-- Core Web Vitals監視
-- パフォーマンス分析
+アクセス解析は現在組み込んでいません（Vercel Analytics・Google Analytics ともに削除済み）。
+必要になった場合は Cloudflare Web Analytics の導入を検討してください。
 
-### 2. Google Analytics
-- ユーザー行動分析
-- コンバージョン追跡
-
-### 3. Search Console
+### Search Console
 - 検索パフォーマンス
 - インデックス状況
 

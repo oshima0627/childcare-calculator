@@ -54,15 +54,6 @@ export default function SocialShare({ result }: SocialShareProps) {
     const url = getShareUrl()
     const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`
     window.open(twitterUrl, '_blank', 'width=550,height=420')
-    
-    // Google Analytics イベント送信
-    if (typeof window !== 'undefined' && (window as any).gtag) {
-      ;(window as any).gtag('event', 'share', {
-        event_category: 'engagement',
-        event_label: 'twitter',
-        method: 'twitter',
-      })
-    }
   }
 
   /**
@@ -73,15 +64,6 @@ export default function SocialShare({ result }: SocialShareProps) {
     const url = getShareUrl()
     const lineUrl = `https://line.me/R/msg/text/?${encodeURIComponent(`${text}\n\n${url}`)}`
     window.open(lineUrl, '_blank')
-    
-    // Google Analytics イベント送信
-    if (typeof window !== 'undefined' && (window as any).gtag) {
-      ;(window as any).gtag('event', 'share', {
-        event_category: 'engagement',
-        event_label: 'line',
-        method: 'line',
-      })
-    }
   }
 
   /**
@@ -91,15 +73,6 @@ export default function SocialShare({ result }: SocialShareProps) {
     const url = getShareUrl()
     const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`
     window.open(facebookUrl, '_blank', 'width=550,height=420')
-    
-    // Google Analytics イベント送信
-    if (typeof window !== 'undefined' && (window as any).gtag) {
-      ;(window as any).gtag('event', 'share', {
-        event_category: 'engagement',
-        event_label: 'facebook',
-        method: 'facebook',
-      })
-    }
   }
 
   /**
@@ -110,15 +83,6 @@ export default function SocialShare({ result }: SocialShareProps) {
       const url = getShareUrl()
       await navigator.clipboard.writeText(url)
       setCopied(true)
-      
-      // Google Analytics イベント送信
-      if (typeof window !== 'undefined' && (window as any).gtag) {
-        ;(window as any).gtag('event', 'share', {
-          event_category: 'engagement',
-          event_label: 'copy_url',
-          method: 'copy',
-        })
-      }
       
       // 2秒後にリセット
       setTimeout(() => setCopied(false), 2000)

@@ -137,7 +137,6 @@ export const APP_CONFIG = {
   title: '育児休業給付金シミュレーター',
   description: '育児休業給付金の手取り額を簡単に計算できるシミュレーターです。',
   url: process.env.NEXT_PUBLIC_APP_URL || 'https://childcare-calculator.nexeed-lab.com',
-  gaId: process.env.NEXT_PUBLIC_GA_ID || '',
 }
 
 // OGP設定

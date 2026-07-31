@@ -78,7 +78,6 @@ npm run start
 ```bash
 # .env.local
 NEXT_PUBLIC_APP_URL=https://your-domain.com
-NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX
 NEXT_PUBLIC_GOOGLE_VERIFICATION=verification_code
 ```
 
