@@ -83,11 +83,14 @@ export default function InputForm({
   /**
    * 初期値が設定されている場合の自動計算
    */
+  // URL クエリ等から初期値を受け取った場合だけ、マウント直後に一度計算する。
+  // 初回描画後に結果を出すのが目的なので、effect 内での更新が意図的に必要。
+  // eslint-disable-next-line react-hooks/exhaustive-deps, react-hooks/set-state-in-effect
   useEffect(() => {
     if (initialSalary > 0) {
       executeCalculation()
     }
-  }, []) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [])
 
   /**
    * コンポーネントのクリーンアップ
