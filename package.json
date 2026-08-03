@@ -5,10 +5,12 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "lint": "next lint",
+    "lint": "eslint",
     "type-check": "tsc --noEmit",
     "preview": "npm run build && wrangler dev",
-    "deploy": "npm run build && wrangler deploy"
+    "deploy": "npm run build && wrangler deploy",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "keywords": [],
   "author": "",
@@ -31,6 +33,7 @@
     "eslint-config-next": "^16.0.8",
     "prettier": "^3.7.4",
     "typescript": "^5.9.3",
+    "vitest": "^3.2.7",
     "wrangler": "^4.116.0"
   }
 }
